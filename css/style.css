@@ -1,0 +1,27 @@
+* {
+    background-color: #1E1E1E;
+    color: #fff;
+    font-size: large;
+    text-align: center;
+}
+body {
+    padding: 10px;
+}
+
+strong,
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: #E300FF;
+}
+input[type="text"] {
+    min-width: 400px;
+    border-radius: 5px;
+    border: 1px solid #E300FF;
+}
+button {
+    background-color: #E300FF;
+    border-radius: 5px;
+}
