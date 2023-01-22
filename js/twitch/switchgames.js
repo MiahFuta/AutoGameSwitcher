@@ -78,7 +78,8 @@ class SwitchGames {
 		reply.then((response) => {
             if (response.ok) {
                 console.log('Game Updated!');
-                $('body').append('<div>Game Updated!</div>');
+                $('body').append('<div>Game Updated!</div><br><br>');
+                $('body').append('<div>Hide this browser source in OBS behind your other scenes!</div>');
             } else {
                 // console.log('Game Update Failed!');
                 location.href = location.protocol + '//' + location.host + location.pathname
