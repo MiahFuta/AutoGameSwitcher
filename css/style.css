@@ -17,7 +17,7 @@ a:active {
     color: #E300FF;
 }
 input[type="text"] {
-    min-width: 400px;
+    min-width: 555px;
     border-radius: 5px;
     border: 1px solid #E300FF;
 }

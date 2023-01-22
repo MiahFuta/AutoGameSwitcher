@@ -190,7 +190,7 @@ class Auth {
 
 	// NOTE Send Relog Link
 	send_relog_message() {
-        $('body').append('Please <a href="#" onclick="return auth.do_redirect(false);">Login</a> to Twitch to Continue!');
+        $('body').append('Please <a href="#" onclick="return auth.do_redirect(false);">Login</a> to Twitch to Continue!<br><br><br><strong>If this is an OBS Browser Source...</strong><br><br>You will need to Right Click the Browser Source then Click "Interact" to continue and login.');
 	}
 
 	// NOTE Convery Seconds to Days

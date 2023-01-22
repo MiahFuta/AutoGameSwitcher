@@ -41,7 +41,7 @@ class SwitchGames {
 
                     let browser_url =  location.protocol + '//' + location.host + location.pathname + '?game=' + game_id;
 
-                    let message = `To Automatically Switch to this game, create a browser source with the following settings.<br><br><hr><br>
+                    let message = `To automatically switch to this game, create a browser source in OBS with the following settings.<br><br><hr><br>
                     <strong>Browser Source URL</strong><br><br>
                     <input id="readOnlyField" type="text" readonly value="${browser_url}"><br><br>
                     <button onclick="copyToClipboard()">Copy to clipboard</button><br><br>
