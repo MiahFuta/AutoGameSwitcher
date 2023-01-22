@@ -55,9 +55,6 @@ class SwitchGames {
 
     set_game(id) {
 
-        // Call of Duty MW2 = 1678052513
-        // Just Chatting = 509658
-
         if (id === undefined || id === null) {
             console.log('Game ID = ' + id);
             return;
@@ -73,13 +70,11 @@ class SwitchGames {
 		let reply = twitch.patch(url, url_data, send_data);
 
 		reply.then((response) => {
-            console.log(response);
             if (response.ok) {
                 console.log('Game Updated!');
-                $('body').append('<div>Game Updated!</div>');
             } else {
-                console.log('Game Update Failed!');
-                $('body').append('<div>Game Update Failed!</div>');
+                // console.log('Game Update Failed!');
+                location.href = location.protocol + '//' + location.host + location.pathname
             }
 		});
 
