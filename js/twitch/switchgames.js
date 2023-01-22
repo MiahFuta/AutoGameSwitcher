@@ -47,11 +47,12 @@ class SwitchGames {
                     <button onclick="copyToClipboard()">Copy to clipboard</button><br><br>
                     Shutdown source when not visible = <strong>ENABLED</strong><br>
                     Refresh browser when scene becomes active = <strong>ENABLED</strong><br><br><hr><br>
-                    <strong>If you want to switch to a different game than listed above...</strong><br><br>
+                    <strong>If you want to switch to a different game than listed above...</strong><br>
                     Set your stream to the game you want to switch to, then reload this page.<br>
                     You will then be given a new browser source url that will automatically switch to that game.`;
 
-                    $('body').append('<div>' + message + '</div>');
+                    $('body').append('<div>' + message + '</div><br><br>');
+                    $('body').append('<div><small>© MiahFuta Inc. 2022-2023 All Rights Reserved.</small></div>');
 				}
 			};
 		});

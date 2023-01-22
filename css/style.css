@@ -25,3 +25,7 @@ button {
     background-color: #E300FF;
     border-radius: 5px;
 }
+small {
+    font-size: medium;
+    font-style: italic;
+}
