@@ -11,8 +11,6 @@ class Settings {
 		if (this.storage_enabled()) {
 			this.set('client_id', 'xw94uiekplv5jap40p2lmjm7ete7fp');
 			this.set('required_scopes', JSON.stringify([
-				'chat:edit',
-				'chat:read',
 				'channel:manage:broadcast',
 				'user:read:broadcast'
 			]));

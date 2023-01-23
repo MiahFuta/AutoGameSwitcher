@@ -1,11 +1,12 @@
 * {
-    background-color: #1E1E1E;
     color: #fff;
     font-size: large;
     text-align: center;
 }
-body {
-    padding: 10px;
+body,
+html {
+    background-color: #1E1E1E;
+    width: 100%;
 }
 
 strong,
@@ -14,18 +15,66 @@ a:link,
 a:visited,
 a:hover,
 a:active {
-    color: #E300FF;
+    color: #f6b4ff;
 }
+
+strong {
+    font-size: larger;
+}
+
 input[type="text"] {
     min-width: 555px;
     border-radius: 5px;
+    background-color: #1E1E1E;
+    color: white;
     border: 1px solid #E300FF;
+    padding: 5px;
 }
+
 button {
     background-color: #E300FF;
     border-radius: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
+
 small {
     font-size: medium;
+    font-style: italic;
+}
+
+#spacer {
+    margin: 30px;
+    margin-left: 10%;
+    margin-right: 10%;
+    border: 1px solid #e100ff78;
+}
+
+#container {
+    width: 800px;
+    background-color: #252526;
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-25%);
+    transform: translate(-50%,-25%);
+    border-radius: 5px;
+    border: 1px solid #E300FF;
+}
+
+#game-info,
+#browser-info,
+#extra-info {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #e100ff78;
+}
+
+#copyright {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: small;
     font-style: italic;
 }
