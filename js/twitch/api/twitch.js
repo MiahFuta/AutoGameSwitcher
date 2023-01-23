@@ -1,6 +1,7 @@
 var twitch;
 
 class Twitch {
+    
     async get(url, url_data) {
 		return await fetch(url + url_data, {
 			headers: this.get_headers(),
@@ -24,13 +25,9 @@ class Twitch {
 		})
         .then((response) => {
             return response;
-            // console.log(response);
         })
-        // .then((json) => {
-        //     return json;
-        // })
         .catch((error) => {
-            this.send_error('asdf ' + error);
+            this.send_error(error);
         });
 	}
 

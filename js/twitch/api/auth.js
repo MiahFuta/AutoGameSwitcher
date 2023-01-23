@@ -34,19 +34,28 @@ class Auth {
 			let valid = this.verify_scopes(scopes);
 
 			if (valid) {
+
 				let token = reply.access_token;
 				this.do_auth_confirmation(token, true);
+
 			} else {
+
 				this.send_relog_message();
+
 			}
 
 		} else {
 
 			let token = this.get_token();
+
 			if (token !== null) {
+
 				this.do_auth_confirmation(token, false);
+
 			} else {
+
 				this.send_relog_message();
+
 			}
 
 		}
@@ -54,14 +63,19 @@ class Auth {
 
 	// NOTE Set Client Login Info
 	set_login_info(token, json, saving, scopes = '') {
+
 		if (saving) {
+
 			settings.set('auth_token', token);
 			console.log('OAuth Token Saved! Reloading...');
 			window.location = window.location.href.split('#')[0];
+
 		} else {
+
 			json.scopes.forEach((scope) => {
 				scopes += scope + ', ';
 			});
+
 			scopes = scopes.substring(0, scopes.length - 2);
 
 			console.log('OAuth Token Successfully Loaded!');
@@ -77,6 +91,7 @@ class Auth {
             var reply = twitch.get(url, url_data);
 
             reply.then((response) => {
+				
                 if (response['data'] === undefined) return;
 
                 var channel_info = response['data'][0];
@@ -100,6 +115,7 @@ class Auth {
 
 	// NOTE Validate Twitch Auth Information
 	async do_auth_confirmation(token, saving) {
+
 		// Docs: https://dev.twitch.tv/docs/authentication
 		var response = await fetch('https://id.twitch.tv/oauth2/validate', {
 			headers: { Authorization: `OAuth ${token}` },
@@ -111,7 +127,9 @@ class Auth {
 		}
 
 		if (this.is_valid()) {
+
 			this.set_login_info(token, response, saving);
+
 		} else {
 
 			if (this.get_token() !== null) {
@@ -127,6 +145,7 @@ class Auth {
 				console.log(`Current Scopes: ${scopes}`);
 
 				this.send_relog_message();
+
 			}
 
 		}
@@ -134,9 +153,11 @@ class Auth {
 
 	// NOTE URL for Client Auth
 	get_redirect_url(force = false, url_scopes = '&scope=') {
+
 		this._get_required_scopes().forEach((scope) => {
 			url_scopes += `${scope}+`;
 		});
+
 		url_scopes = url_scopes.substring(0, url_scopes.length - 1);
 
 		let browser_url = location.protocol + '//' + location.host + location.pathname;
@@ -151,24 +172,35 @@ class Auth {
 		let verify = `&force_verify=${force}`;
 
 		return api_url + url_scopes + redirect_uri + verify;
+
 	}
 
 	// NOTE Verify Scopes Array
 	verify_scopes(returned_scopes, flag = true) {
+
 		this._get_required_scopes().forEach((scope) => {
+
 			var has_scope = returned_scopes.includes(scope);
 			if (!has_scope) flag = false;
+
 		});
+
 		return flag;
+
 	}
 
 	// NOTE Get URL JSON Data
 	parse_url_hash(hash, params = {}) {
+
 		hash.split('&').map((hk) => {
+
 			let temp = hk.split('=');
 			params[temp[0]] = temp[1];
+
 		});
+
 		return params;
+
 	}
 
 	// NOTE Redirect to Twitch Auth URL
@@ -177,20 +209,41 @@ class Auth {
         var params = {};
         var url = new URL(window.location.href);
         var searchParams = new URLSearchParams(url.search);
+
         for (var pair of searchParams.entries()) {
+
             params[pair[0]] = pair[1];
+
         }
 
         if (params.game !== undefined) {
+
             settings.set('game', params.game);
+
         }
 
 		location.href = this.get_redirect_url(force_verify);
+
 	}
 
 	// NOTE Send Relog Link
 	send_relog_message() {
-        $('body').append('<br><br>Please <a href="#" onclick="return auth.do_redirect(false);">Click Here to Login</a> to Twitch to Continue!<br><br><br><br><strong>If this is an OBS Browser Source...</strong><br><br>You will need to Right Click the Browser Source then Click "Interact" to continue and login.');
+		
+		$('#container').css('display', '');
+		$('#setup-info').css('display', '');
+
+		let setup_html = `<strong>Streamer Login Required!</strong><br>`;
+		setup_html += `<button id='login-button' onclick="return auth.do_redirect(false);">Click Here to Login to Twitch</button><br>`;
+
+		let obs_html = `<div id='spacer'></div>`;
+		obs_html += `<strong>OBS Browser Source Detected!</strong><br><br>`;
+		obs_html += `You will first need to Right Click this Browser Source in your Sources List.<br>`;
+		obs_html += `Then Click "Interact" which will allow you to Continue and Login.`;
+
+		if (main.is_obs()) setup_html += obs_html;
+
+        $('#setup-info').html(setup_html);
+
 	}
 
 	// NOTE Convery Seconds to Days
@@ -211,4 +264,3 @@ class Auth {
 }
 
 auth = new Auth();
-auth.inspect_url();

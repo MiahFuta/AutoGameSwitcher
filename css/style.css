@@ -3,18 +3,19 @@
     font-size: large;
     text-align: center;
 }
+
 body,
 html {
     background-color: #1E1E1E;
     width: 100%;
 }
 
-strong,
 a,
 a:link,
-a:visited,
 a:hover,
-a:active {
+a:visited,
+a:active,
+strong {
     color: #f6b4ff;
 }
 
@@ -40,9 +41,27 @@ button {
     padding-bottom: 5px;
 }
 
+button:hover {
+    background-color: #b300ff;
+}
+
+#login-button {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
 small {
     font-size: medium;
     font-style: italic;
+}
+
+h4 {
+    font-size:x-large;
+    margin-bottom: 30px;
+}
+
+h4 a {
+    font-size:x-large;
 }
 
 #spacer {
@@ -64,6 +83,7 @@ small {
     border: 1px solid #E300FF;
 }
 
+#setup-info,
 #game-info,
 #browser-info,
 #extra-info {

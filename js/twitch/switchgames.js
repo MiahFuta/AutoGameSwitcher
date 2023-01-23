@@ -1,19 +1,5 @@
 var game;
 
-function copyToClipboard() {
-    var readOnlyField = document.getElementById("readOnlyField");
-    var text = readOnlyField.value;
-    navigator.clipboard.writeText(text).then(
-        function() {
-            alert("URL Copied! Use CTRL+V to Paste!\n\n" + text);
-            console.log("Copying to clipboard was successful!");
-        },
-        function(err) {
-            console.error("Failed to copy text: ", err);
-        }
-    );
-}
-
 class SwitchGames {
 
     get_game() {
@@ -24,9 +10,13 @@ class SwitchGames {
 		let reply = twitch.get(url, url_data);
 
 		reply.then((response) => {
+
 			if (response['data'] === undefined) {
+
 				console.error(response);
+
 			} else {
+
 				if (response['data'][0] !== undefined) {
 
 					let data = response['data'][0];
@@ -39,12 +29,13 @@ class SwitchGames {
 
                     let game_string = `<strong>Current Game</strong><br><br>${game_name}`;
                     game_string += `<div id='spacer'></div>`;
-                    game_string += `To automatically switch to this game, create a browser source in OBS with the settings found below.`;
+                    game_string += `<strong>To automatically switch to this game...</strong><br><br>`;
+                    game_string += `Create a Browser Source in OBS with the settings found below.`;
                     game_string += `<div id='spacer'></div>`;
                     game_string += `<strong>To switch to a different game than the one listed above...</strong><br><br>`;
-                    game_string += `Set your stream to the game you want to switch to on Twitch, then reload this page.<br>`;
-                    game_string += `You will then get a new browser source url that, when loaded, will switch to that game.<br>`;
-                    game_string += `Use that url to create a new browser source in the scene that will trigger the game change.`;
+                    game_string += `Set your stream to the game you want to switch to, on Twitch, then reload this page.<br>`;
+                    game_string += `You will then get a new Browser Source URL that, when loaded, will switch to that game.<br>`;
+                    game_string += `Use that URL and create a new Browser Source in the scene that will trigger the game change.`;
 
                     $('#game-info').html(game_string);
 
@@ -58,29 +49,28 @@ class SwitchGames {
 
                     $('#browser-info').html(browser_string);
 
-                    let extra_string = `When adding the browser source in OBS, set the name of the browser source to something like...<br><br>`;
+                    let extra_string = `When adding the Browser Source in OBS, set the name of the Browser Source to something like...<br><br>`;
                     extra_string += `<strong>" Scene Switch - ${game_name} "</strong><br><br>`;
-                    extra_string += `That will allow you to easily keep track of which game each browser source will switch you to.`;
+                    extra_string += `That will allow you to easily keep track of which game each Browser Source will switch you to.`;
                     extra_string += `<div id='spacer'></div>`;
-                    extra_string += `Use the same browser source in different scenes to set the same game in different scenes.<br>`;
-                    extra_string += `Set different games for all of your scenes by making different browser sources for each scene.`;
+                    extra_string += `Use the same Browser Source in different scenes to set the same game in different scenes.<br>`;
+                    extra_string += `Set different games for all of your scenes by making different Browser Sources for each scene.`;
 
                     $('#extra-info').html(extra_string);
 
-                    game.show_all();
+                    main.show_all();
 
 				}
+
 			};
+
 		});
 
     }
 
     set_game(id) {
 
-        if (id === undefined || id === null) {
-            console.log('Game ID = ' + id);
-            return;
-        }
+        if (id === undefined || id === null) return;
 
         let url = 'https://api.twitch.tv/helix/channels?';
 		let url_data = 'broadcaster_id=' + settings.get('channel_id');
@@ -92,36 +82,46 @@ class SwitchGames {
 		let reply = twitch.patch(url, url_data, send_data);
 
 		reply.then((response) => {
+
             if (response.ok) {
+
                 console.log('Game Updated!');
-                $('body').append('<div>Game Updated!</div><br><br>');
-                $('body').append('<div>Hide this browser source in OBS behind your other scenes!</div>');
+
+                let message = `<strong>Game Updated!</strong><br><br>`;
+                message += `Hide this Browser Source in OBS behind your other scenes!`;
+
+                this.post_status(message);
+
             } else {
+
                 console.log('Game Update Failed!');
-                $('body').append('<div>Game Update Failed!</div><br><br>');
-                $('body').append('<div>Refresh this browser source to try again!</div>');
+
+                let message = `<strong>Game Update Failed!</strong><br><br>`;
+                message += `Refresh this Browser Source to try again!`;
+
+                this.post_status(message);
+
             }
+
 		});
 
     }
 
-    hide_all() {
-        $('#container').css('display', 'none');
-        $('#game-info').css('display', 'none');
-        $('#browser-info').css('display', 'none');
-        $('#extra-info').css('display', 'none');
-        $('#copyright').css('display', 'none');
-    }
+    post_status(message) {
 
-    show_all() {
         $('#container').css('display', '');
         $('#game-info').css('display', '');
-        $('#browser-info').css('display', '');
-        $('#extra-info').css('display', '');
-        $('#copyright').css('display', '');
+
+        message += `<div id='spacer'></div>`;
+        message += `<strong>Make sure these Browser Source Settings are Enabled!</strong><br><br>`;
+        message += `<strong>&rarr; &nbsp</strong> Shutdown source when not visible.<strong>&nbsp &larr;</strong> <br><br>`;
+        message += `<strong>&rarr; &nbsp</strong> Refresh browser when scene becomes active.<strong>&nbsp &larr;</strong> `;
+
+        let game_html = `${message}`;
+        $('#game-info').html(game_html);
+
     }
 
 }
 
 game = new SwitchGames();
-game.hide_all();
