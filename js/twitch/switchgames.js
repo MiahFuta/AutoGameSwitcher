@@ -81,8 +81,9 @@ class SwitchGames {
                 $('body').append('<div>Game Updated!</div><br><br>');
                 $('body').append('<div>Hide this browser source in OBS behind your other scenes!</div>');
             } else {
-                // console.log('Game Update Failed!');
-                location.href = location.protocol + '//' + location.host + location.pathname
+                console.log('Game Update Failed!');
+                $('body').append('<div>Game Update Failed!</div><br><br>');
+                $('body').append('<div>Refresh this browser source to try again!</div>');
             }
 		});
 
