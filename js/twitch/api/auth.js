@@ -104,9 +104,9 @@ class Auth {
                 console.log('Channel ID: ' + settings.get('channel_id'));
 
                 $(document).ready(function () {
-                    setTimeout(function () {
+                    // setTimeout(function () {
                         main.init();
-                    }, 1000);
+                    // }, 1000);
                 });
 
             });

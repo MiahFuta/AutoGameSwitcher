@@ -19,6 +19,14 @@ function copyToClipboard() {
 
 class Main {
 
+    run() {
+
+        this.hide_all();
+
+        auth.inspect_url();
+
+    }
+
     init() {
 
         let last_game = settings.get('game');
@@ -97,5 +105,4 @@ class Main {
 }
 
 main = new Main();
-main.hide_all();
-auth.inspect_url();
+main.run();
