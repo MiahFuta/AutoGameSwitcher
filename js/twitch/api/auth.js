@@ -230,7 +230,11 @@ class Auth {
 	send_relog_message() {
 		
 		$('#container').css('display', '');
+        $('#title-info').css('display', '');
 		$('#setup-info').css('display', '');
+
+        $('#title-info').html(`<h3>${document.title}</h3>`);
+
 
 		let setup_html = `<strong>Streamer Login Required!</strong><br>`;
 		setup_html += `<button id='login-button' onclick="return auth.do_redirect(false);">Click Here to Login to Twitch</button><br>`;

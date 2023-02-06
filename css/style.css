@@ -55,6 +55,10 @@ small {
     font-style: italic;
 }
 
+h3 {
+    font-size: x-large;
+}
+
 h4 {
     font-size:x-large;
     margin-bottom: 30px;
@@ -84,12 +88,19 @@ h4 a {
 }
 
 #setup-info,
+#title-info,
+#game-info,
+#browser-info,
+#extra-info {
+    border-bottom: 1px solid #e100ff78;
+}
+
+#setup-info,
 #game-info,
 #browser-info,
 #extra-info {
     padding-top: 30px;
     padding-bottom: 30px;
-    border-bottom: 1px solid #e100ff78;
 }
 
 #copyright {

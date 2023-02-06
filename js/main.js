@@ -86,6 +86,7 @@ class Main {
     hide_all() {
 
         $('#container').css('display', 'none');
+        $('#title-info').css('display', 'none');
         $('#setup-info').css('display', 'none');
         $('#game-info').css('display', 'none');
         $('#browser-info').css('display', 'none');
@@ -96,6 +97,7 @@ class Main {
     show_all() {
 
         $('#container').css('display', '');
+        $('#title-info').css('display', '');
         $('#game-info').css('display', '');
         $('#browser-info').css('display', '');
         $('#extra-info').css('display', '');
